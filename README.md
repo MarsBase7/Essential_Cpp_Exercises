@@ -25,3 +25,4 @@
 # include <algorithm>
 sort( container.begin(), container.end() )
 ```
+再将排序后的结果输出到另一个文件。
