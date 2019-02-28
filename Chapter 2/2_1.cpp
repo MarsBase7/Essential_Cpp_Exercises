@@ -6,7 +6,7 @@
 
 using namespace std;
 
-extern bool fibon_elem( int pos, int &elem )
+extern bool fibon_elem( int pos, int & elem )
 {
     if ( pos <= 0 || pos > 32 )  //检查位置合理性，限制最大允许的位置值为32
         { elem = 0; return false; }
@@ -33,7 +33,7 @@ int main()
         cout << "Please enter a position of Fibonacci Sequence : ";
         cin >> pos;
 
-        if ( fibon_elem( pos, elem) )
+        if ( fibon_elem( pos, elem ) )
             cout << "element #" << pos << " is " << elem << endl;
         else cout << "Sorry. Could not calculate element # " << pos << endl;
             
