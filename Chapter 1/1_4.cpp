@@ -23,4 +23,6 @@ int main()
     cout << "Hello, "
          << first_name << " " << last_name
          << " ... and goodbye!" << endl;
+    
+    return 0;
 }
