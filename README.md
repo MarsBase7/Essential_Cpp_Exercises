@@ -18,7 +18,7 @@
 
 编写一个程序，从标准输入设备读取一串整数，并将读入的整数依次放到容器，然后遍历容器，求取数值总和。将总和及平均值输出至标准输出设备。（推荐使用vector）
 
-* [练习1.7]
+* [练习1.7](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%201/1_7.cpp)
 
 使用编辑工具输入两行（或更多）文字并存盘。然后编写一个程序，打开该文本文件，将其中每个字都读取到一个vector<string>对象中。遍历该vector，将内容显示到cout。然后利用泛型算法sort()，对所有文字排序：
 ```
