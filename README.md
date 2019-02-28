@@ -27,6 +27,11 @@ sort( container.begin(), container.end() )
 ```
 再将排序后的结果输出到另一个文件。
 
-* 练习 1.8
+* [练习 1.8](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%201/1_8.cpp)
 
 某个游戏，会根据用户答错的次数提供不同的安慰语句。请以array存储四种不同的字符信息，并以用户答错次数作为array的索引值，以此方式来显示安慰语句。
+
+<br/>
+
+### Procedural Programming
+---
