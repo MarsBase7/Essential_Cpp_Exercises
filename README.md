@@ -56,3 +56,17 @@ Pentagonal数列的求值公式是P(n)=n(3n-1)/2，借此产生1,5,12,22,35等�
 写一个函数，以局部静态(local static)的vector储存Pentagonal数列元素。此函数返回一个const指针，指向该vector。如果vector的大小小于指定的元素个数，就扩充vector的大小。
 接下来再实现第二个函数，接受一个位置值，返回该位置上的元素。
 最后，编写main()测试这些函数。
+
+* [练习2.5](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%202/2_5.cpp)
+
+实现一个重载的max()函数，让它接受以下参数：
+(a)两个整数，
+(b)两个浮点数，
+(c)两个字符串，
+(d)一个整数vector，
+(e)一个浮点数vector，
+(f)一个字符串vector，
+(g)一个整数数组，以及一个表示数组大小的整数值，
+(h)一个浮点数数组，以及一个表示数组大小的整数值，
+(i)一个字符串数组，以及一个表述数组大小的整数值，
+最后，编写main()测试这些函数。
