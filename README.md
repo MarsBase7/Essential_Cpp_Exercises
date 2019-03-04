@@ -51,3 +51,8 @@ Pentagonal数列的求值公式是P(n)=n(3n-1)/2，借此产生1,5,12,22,35等�
 
 将练习2.2的Pentagonal数列求值函数拆分为两个函数，其中之一为inline，用来检验元素个数是否合理。如果的确合理，而且尚未被计算，便执行第二个函数，执行实际的求值工作。
 
+* [练习2.4](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%202/2_4.cpp)
+
+写一个函数，以局部静态(local static)的vector储存Pentagonal数列元素。此函数返回一个const指针，指向该vector。如果vector的大小小于指定的元素个数，就扩充vector的大小。
+接下来再实现第二个函数，接受一个位置值，返回该位置上的元素。
+最后，编写main()测试这些函数。
