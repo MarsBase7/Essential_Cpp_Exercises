@@ -35,7 +35,7 @@ bool calc_elems( vector<int> &vec, int pos )
 {
 	const int max_size = 64;
 
-	if ( pos <=0 || pos > 64 ){
+	if ( pos <=0 || pos > max_size ){
 		cerr << "Sorry. Invalid position: " << pos << endl;
 		return false;
 	}
