@@ -1,4 +1,5 @@
 /*
+练习2.4
 写一个函数，以局部静态(local static)的vector储存Pentagonal数列元素。此函数返回一个const指针，指向该vector。如果vector的大小小于指定的元素个数，就扩充vector的大小。
 接下来再实现第二个函数，接受一个位置值，返回该位置上的元素。
 最后，编写main()测试这些函数。
