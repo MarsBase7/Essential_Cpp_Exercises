@@ -39,3 +39,10 @@ sort( container.begin(), container.end() )
 * [练习2.1](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%202/2_1.cpp)
 
 编写一个程序，根据用户输入的位置值，返回斐波那契数列的该位置的值，且允许用户不断输入位置值，直到用户希望停止为止。
+
+* 练习2.2
+
+Pentagonal数列的求值公式是P(n)=n(3n-1)/2，借此产生1,5,12,22,35等元素值。
+编写一个函数，利用上述公式，将产生的元素放到vector中，元素个数由用户指定。（检查元素个数的有效性，太大则可能引发overflow问题。）
+编写第二个函数，能够将给定的vector的所有元素一一打印出来。此函数的第二个参数接受一个字符串，表示存放在vector内的数列的类型。
+最后再写一个main()，测试上述两个函数。
