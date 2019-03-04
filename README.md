@@ -70,3 +70,7 @@ Pentagonal数列的求值公式是P(n)=n(3n-1)/2，借此产生1,5,12,22,35等�
 (h)一个浮点数数组，以及一个表示数组大小的整数值，
 (i)一个字符串数组，以及一个表述数组大小的整数值，
 最后，编写main()测试这些函数。
+
+* [练习2.6](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%202/2_6.cpp)
+
+以template重新完成练习2.5，并对main()函数做适度的修改。
