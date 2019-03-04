@@ -40,7 +40,7 @@ sort( container.begin(), container.end() )
 
 编写一个程序，根据用户输入的位置值，返回斐波那契数列的该位置的值，且允许用户不断输入位置值，直到用户希望停止为止。
 
-* 练习2.2
+* [练习2.2](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%202/2_2.cpp)
 
 Pentagonal数列的求值公式是P(n)=n(3n-1)/2，借此产生1,5,12,22,35等元素值。
 编写一个函数，利用上述公式，将产生的元素放到vector中，元素个数由用户指定。（检查元素个数的有效性，太大则可能引发overflow问题。）
