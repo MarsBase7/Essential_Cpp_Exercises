@@ -81,7 +81,7 @@ Pentagonal数列的求值公式是P(n)=n(3n-1)/2，借此产生1,5,12,22,35等�
 
 <br/>
 
-### Generic Programming
+## Generic Programming
 
 * [练习3.1](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%203/3_1.cpp)
 
