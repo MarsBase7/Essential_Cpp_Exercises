@@ -1,0 +1,178 @@
+
+How I'd try to win the 36 hour self driving hackathon at AWS reInvent.
+
+11/24/2017
+0 Comments
+ The reInvent Robocar hackathon is just 2 days away. There participants will have 36 hours to improve a standard Donkey Car to race autonomously around the track against other cars.  Since I’ll be there as an facilitator and won’t get to race my own car I thought I’d share how I’d try to win this race. These are also features that would be great to add to the standard Donkey Car so please make pull requests after the event if you get them working.
+
+36 hours will blow by. Anyone who’s ever tried a hackathon knows time is your most precious resource. 36 hours is not long enough to solve all the problems. If you attempt too much you’ll risk accomplishing nothing. I'd try to pick the easiest change that will also have a big impact on your lap time. 
+
+Current state of Donkey Car. Everyone will start with a Donkey Car 2 can already be manually controlled by your phone, collect images, steering and throttle data and drive it's self using an end to end neural network that runs on a Raspberry Pi.
+
+These neural net (NN) autopilots are made by driving the track 10-20 times to collect training data (images, steering & throttle values) and then training a NN using Keras/Tensorflow to clone the drivers behavior. This approach works but is NOT robust. Here are the some of the things that often go wrong:   
+
+Changes to the track at race-time mess up the pilot. For example if a crowd stands around the track at race time that wasn’t there while you were training, your network might think the guy wearing white shoes is the track and go toward the crowd.
+If the car goes beyond where it was trained it has no way to know how to get back on course because it’s never seen those images before and has no map.
+When going fast, one very wrong steering angle can throw the car off track enough so it can’t recover.
+
+Some of the suggestions below would make the autopilot more reliable and potentially much faster.
+
+My hackathon priorities.
+
+Separate the autopilot into vision and control parts.
+The current end to end neural network is one monolith that converts a stream of images to steering and throttle values. This makes it very difficult to fix if only part of it is broken. One way to make this more modular is break the end to end net network into two parts, a vision part and a control part. 
+
+The vision part would find the location of the lane using either a CV function or NN trained on the output of the CV function. The control part would then adjust the steering and throttle based on the relative lane location. 
+
+Resources
+Comma.ai does this in their open pilot with something called a "vision pipeline". ​
+You can see how to do all the lane detection computer vision by searching Udacity Self Driving Project Lane Keeping Project on google or github.
+
+
+ Picture
+Udacity lane keeping and object detection project using computer vision.
+Make Maps using visual odometry. 
+This is likely the hardest to do right but will have the biggest gains. Maps are what will cut race times in half and enable longer autonomous trips. One promising approach is to make a map of the track by driving, then plot your desired race line for your car to follow.  
+
+Visual Odometry Resources
+Good stackoverflow question.
+My attempt in a jupyter notebook.  (still need to distort the image before tracking keypoints):  copied from this.
+Monocular Visual Odometry using OpenCV.
+ Picture
+Map of path taken using visual odometry (not on donkey car)
+
+Add variable rate throttle for the autopilot (easy). 
+The autopilot you train tries to drive like you did in when you collected training data. You often don't drive as fast as you could for the car's safety. You could make the big throttles are bigger so the autopilot drives faster than you did manually.
+Filter image before training. 
+Right now the Convolution Neural Net (CNN) is responsible for identifying the important features in the images. It’s possible to help the network by highlighting those features. For example:
+Crop the image to only show the part that shows the track.
+Detect the edges of the track using Canny or some other method.
+Augment training data by altering images.
+The NNs could be made more robust by training on more data. Augmentting the image data by adding blurs or random shapes and adjusting the white balance can give you more reasonable data to train on.  
+
+Keras has a function to augment image data but its a little tricky to alter steering angle when you flip the image. You could write a few image functions that could be included in the record transform function of the training data generator. 
+Add a PID and/or Kalman filter. 
+The current network outputs jittery steering. Even when the car is stationary you can see the wheels twitch as the input image changes slightly. This can get better if you train on hundreds of thousands of images it never completely goes away. When the car is going fast around a corner one twitch in the wrong direction can make it go off course and not come back.  Adding a PID loop (code) could smooth the steering. 
+
+Make the network statefull by adding a recurrent layer.
+The default neural network is stateless. Every 30th of a second it uses a single image to make a steering and throttle prediction.  Since the most likely next steering angle is going to be the same as the last prediction it would be helpful for the pilot to know the recent steering angles. Recurrent neural network layers loop back on themselves so information can be saved through time which could improve the pilot. 
+
+To do this you'd need change the default Keras model to include a recurrent layer and also the batch generator would need to be changed to train on sequences instead of frames.  Tawn has talked about doing this.
+
+Predict steering of future frames.
+The current autopilot current tries to estimate the steering angle for the input image. This means that by the time the servos move the car has moved passed where it should have. A simple fix for this would be to train the neural network to predict the steering angle 5-20 frames ahead of the current frame. If you really want to get creative you can add additional outputs that predict the steering for the current frame, frame 30, frame 60 and frame 90 like DrClick did here (not on Donkey).
+ Picture
+network to predict future frames steering angles by DrClick
+Use the confidence of the network predictions to scale speed or default steering. 
+The output of the default categorical model is a softmax for 15 categories. This means that the sum of outputs for all 15 categories is 1 and you can use these outputs as the likelihood the car should go in that direction. So if the outputs are all zero except for the center output then the car should definitely go straight. If you are getting values of .4 for steering right and left then you know that the autopilot is unsure where to turn.
+Add wheel encoders.
+Speed: The output of the autopilot is currently a throttle value not a velocity value which comes with shortcomings. You don’t know how fast you’re going or how far you’ve gone. A throttle value when your battery is full results in a faster speed than when the battery is low.
+Rotation: The difference between the wheels rotating will give you cars rotation.
+Dead reckoning: Knowing the rotation of your wheels could let you plot your exact path. This could be used to predict upcoming turns. This method works amazing if the track doesn’t have any obstacles.
+
+A couple peopled have gotten encoders (code) to work on donkey cars.
+
+ Picture
+rotary encoder on the drive shaft (by Alan Wells)
+
+Add IMU to model physics of car.
+An IMU will give you inputs about the physics of your car to help you estimate speed and rotation. This could help you estimate your place on the track as well as estimate the completion of a turn.
+​
+Use an existing model and finish up training with much less data.
+Here's a notebook to see how this works. 
+
+
+Get Stoked!
+Here are some things to checkout so you're not learning from scratch on race day. 
+
+Check out the instructions.
+Check out the code base.
+Try training a standard autopilot on the simulator.
+Try editing/creating your own part that runs in the drive loop.
+
+
+This is going to be good.
+- Roscoe (@daduce)
+0 Comments
+Simulator!
+
+10/16/2017
+1 Comment
+We are always looking for ways to accelerate innovation. To that end Tawn Kramer has created a donkeycar simulator to help generate datasets, test autopilots,  experiment with reinforcement learning techniques and potentially train a Depthnet. 
+
+The simulator download links and instructions are now posted in the docs.donkeycar.com. 
+ Picture
+The AVC course.
+ Picture
+Several track options.
+ Picture
+Option to auto drive and collect data.
+1 Comment
+How to clean data?
+
+10/2/2017
+2 Comments
+Most donkey cars currently use the end to end neural network autopilots. If you train these types of pilots on data that contain crashes, they won't perform well. So we need an easy way to remove the data we don't want to train on. Thanks to Kenneth Jiang, donkey now has a simple web app to remove bad data. 
+
+Simply run "donkey tub <path to your tubs>" and you can pick the tub(dataset) to clean. Watch the recorded data as a video and splice and select the parts that you want to delete.  Easy.
+ Picture
+2 Comments
+Donkey 2.1 - Componentized Architecture
+
+6/22/2017
+1 Comment
+We are working on refactoring the Donkey code to support a more modular architecture so that people can contribute code rather than rewriting the library. All the hardware of the Donkey2 standard build will remain the same but it will be easier to add sensors(lidar, odometry, ... ) or change controllers (bluetooth, webserver, adhoc wifi, ...).
+ Picture
+It borrows concepts from Keras and ROS to make creating and experimenting with your car easy. Everything is still all python.
+
+#setup the parts
+camera = Camera(resolution=(120,160), refresh_rate=.1, threaded=True)
+controller = LocalWebController()
+throttle = ThrottleActuator(pwm_max=500, pwm_min=200, channel=0)
+steering = SteeringActuator(pwm_left=400, pwm_center=500, pwm_right=600, channel=1)
+datastore = FileDatastore(path='~/mydonkey/sessions/')
+#create the vehicle
+car = Vehicle()
+#add a camera and remote controller
+car.add(camera, outputs=['camera/image'], threaded=True)
+car.add(controller, inputs=['camera/image'], outputs=['user/throttle', 'user/angle', 'user/drivemode'])
+#get the final throttle and steering values to move the vehicle.
+car.add(throttle, inputs=['user/throttle'])
+car.add(steering, inputs=['user/steering'])
+#record all the variables in memory every looop.
+car.add(datastore, inputs='*')
+#start the drive loop
+car.start()
+You can see the concept in action in this Jupyter notebook and can join the discussion in the #donkey_core slack channel. We'll post update instructions to the #general slack channel when it's ready to drive.  
+1 Comment
+What to work on for the June 17th DIY Robocars Race
+
+5/22/2017
+0 Comments
+Here are some goals to improve the Donkey V2 car. Completing these by the July 17th DIY Robocars Race will give us competitive race times and would prepare us begin doing object detection and avoidance.
+Train an autopilot for the DIY Robocars track that use throttle. Everything exists to make this happen but better data is needed. Manual annotation of past datasets to speed up on the straightaways could work.
+Train an autopilot that have a memory of a few frames.  This will help the car avoid the rouge command to turn the opposite direction for a single frame that gets if off course. Memory can be implemented by using a recurrent layer in the network. Implementation may require changing the training/driving code to provide sequences instead of individual frames.
+Build at least one car with an odometer and document how to install it. * Currently the autopilot output is throttle. This is a problem because the speed of the car for any given throttle can vary depending on the angle of the road or how the battery state. This will require adding an additional variable to each frame. 
+Build at least one car with LIDAR and document how to build it. * Obstacle avoidance is one of the basic requirements of self driving cars. LIDAR can be used see how close objects are to the car.  With LIDAR on at least one car, we'll learn what depth information can be captured on the track. 
+
+* 3 & 4: The goal is to capture enough data from the cars with expensive/difficult sensors so that a neural net or visual heuristic can be trained to predict the output of these sensors using just the camera. This will enable other cars to install software versions of these sensors on their existing cars without the hardware. 
+
+There are also improvements to the web interface that would help speed up training and testing. Currently there is a lot of command line steps people have to remember to build a working model. 
+Button on the drive screen to start a new session.
+Some way to rename existing sessions. 
+Link download existing sessions in a zipped file or mp4 video.
+Show summary of pilots when pilot is clicked. 
+Link to download pilots in hdf5 format. 
+Page to select sessions and train autopilots. 
+
+If you'd like to contribute, please join our slack channel, create a github branch, make your improvements, and submit a pull request. These will goals will be made into issues on github as well. 
+0 Comments
+A standard car and camera to share data and autopilots.
+
+5/22/2017
+0 Comments
+The Donkey V2 design docs standardized the the camera height and angle as well as the type of car.  This is important so that we can not only share code but also training data and autopilots.  
+
+The standard design will let someone who just built their car use the best autopilots created by the most experienced donkey trainer. Anyone with a donkey will be able to compete in the DIYRobocar races without collecting their own training data ever race. This will leave us more time to focus on improving the autopilot or Donkey software. 
+
+For now we've set up a spreadsheet for you to find autopilots and a form for you to submit data and trained autopilots. Before anything is published to the spreadsheet it will be reviewed for quality so that other people don't waste time trying to use bad data or a tweaker autopilot. 
