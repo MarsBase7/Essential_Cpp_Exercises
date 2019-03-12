@@ -3,7 +3,7 @@
 
 <br/>
 
-### Basic C++ Programming
+## Basic C++ Programming
 ---
 
 * [练习 1.4](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%201/1_4.cpp)
@@ -35,7 +35,7 @@ sort( container.begin(), container.end() )
 
 <br/>
 
-### Procedural Programming
+## Procedural Programming
 ---
 * [练习2.1](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%202/2_1.cpp)
 
