@@ -74,3 +74,22 @@ Pentagonal数列的求值公式是P(n)=n(3n-1)/2，借此产生1,5,12,22,35等�
 * [练习2.6](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%202/2_6.cpp)
 
 以template重新完成练习2.5，并对main()函数做适度的修改。
+
+<br/>
+
+### Generic Programming
+---
+
+* [练习3.1](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%203/3_1.cpp)
+
+写一个读取文本文件的程序，将文件中的每个单字存入map。（map的key是单字，map的value是该单字在文本文件中出现的次数。）
+再定义一份由“排除字集”组成的set，其中包含诸如a、an、or、the、and和but之类的单字。将某单字放入map之前，先确定该单字并不存在于“排除字集”中。
+一旦文本文件读取完毕，请显示一份单字清单，并显示各单字的出现次数。
+可以再加以扩展，在显示单字之前，允许用户查询某个单字是否出现于文本文件中。
+
+* [练习3.2](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%203/3_2.cpp)
+
+读取文本文件内容（同练习3.1）并将内容存储于vector。
+以字符串长度为依据，对vector排序。
+定义一个function object并传给sort()；这个function object接受两个字符串，当第一个字符串的长度小于第二个字符串的长度时，就返回true。
+最后，打印排序后的vector内容。
