@@ -13,19 +13,15 @@
 
 * [练习1.5](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%201/1_5.cpp)
 
-编写一个程序，能够询问用户的姓名，并读取用户所输入的内容。    
-请确保用户输入的名称长度大于两个字符。    
-如果用户的确输入了有效名称，就响应一些信息。（推荐使用string对象）
+编写一个程序，能够询问用户的姓名，并读取用户所输入的内容。请确保用户输入的名称长度大于两个字符。如果用户的确输入了有效名称，就响应一些信息。（推荐使用string对象）
 
 * [练习1.6](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%201/1_6.cpp)
 
-编写一个程序，从标准输入设备读取一串整数，并将读入的整数依次放到容器，然后遍历容器，求取数值总和。    
-将总和及平均值输出至标准输出设备。（推荐使用vector）
+编写一个程序，从标准输入设备读取一串整数，并将读入的整数依次放到容器，然后遍历容器，求取数值总和。将总和及平均值输出至标准输出设备。（推荐使用vector）
 
 * [练习1.7](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%201/1_7.cpp)
 
-使用编辑工具输入两行（或更多）文字并存盘。然后编写一个程序，打开该文本文件，将其中每个字都读取到一个vector<string>对象中。    
-遍历该vector，将内容显示到cout。然后利用泛型算法sort()，对所有文字排序：
+使用编辑工具输入两行（或更多）文字并存盘。然后编写一个程序，打开该文本文件，将其中每个字都读取到一个vector<string>对象中。遍历该vector，将内容显示到cout。然后利用泛型算法sort()，对所有文字排序：
 ```
 # include <algorithm>
 sort( container.begin(), container.end() )
@@ -48,19 +44,18 @@ sort( container.begin(), container.end() )
 * [练习2.2](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%202/2_2.cpp)
 
 Pentagonal数列的求值公式是P(n)=n(3n-1)/2，借此产生1,5,12,22,35等元素值。    
-编写一个函数，利用上述公式，将产生的元素放到vector中，元素个数由用户指定。（检查元素个数的有效性，太大则可能引发overflow问题。）    
-编写第二个函数，能够将给定的vector的所有元素一一打印出来。此函数的第二个参数接受一个字符串，表示存放在vector内的数列的类型。    
+(1) 编写一个函数，利用上述公式，将产生的元素放到vector中，元素个数由用户指定。（检查元素个数的有效性，太大则可能引发overflow问题。）    
+(2) 编写第二个函数，能够将给定的vector的所有元素一一打印出来。此函数的第二个参数接受一个字符串，表示存放在vector内的数列的类型。    
 最后再写一个main()，测试上述两个函数。
 
 * [练习2.3](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%202/2_3.cpp)
 
-将练习2.2的Pentagonal数列求值函数拆分为两个函数，其中之一为inline，用来检验元素个数是否合理。    
-如果的确合理，而且尚未被计算，便执行第二个函数，执行实际的求值工作。
+将练习2.2的Pentagonal数列求值函数拆分为两个函数，其中之一为inline，用来检验元素个数是否合理。如果的确合理，而且尚未被计算，便执行第二个函数，执行实际的求值工作。
 
 * [练习2.4](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%202/2_4.cpp)
 
-写一个函数，以局部静态(local static)的vector储存Pentagonal数列元素。此函数返回一个const指针，指向该vector。如果vector的大小小于指定的元素个数，就扩充vector的大小。    
-接下来再实现第二个函数，接受一个位置值，返回该位置上的元素。    
+(1) 写一个函数，以局部静态(local static)的vector储存Pentagonal数列元素。此函数返回一个const指针，指向该vector。如果vector的大小小于指定的元素个数，就扩充vector的大小。    
+(2) 接下来再实现第二个函数，接受一个位置值，返回该位置上的元素。    
 最后，编写main()测试这些函数。
 
 * [练习2.5](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%202/2_5.cpp)
@@ -88,14 +83,14 @@ Pentagonal数列的求值公式是P(n)=n(3n-1)/2，借此产生1,5,12,22,35等�
 
 * [练习3.1](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%203/3_1.cpp)
 
-写一个读取文本文件的程序，将文件中的每个单字存入map。（map的key是单字，map的value是该单字在文本文件中出现的次数。）    
-再定义一份由“排除字集”组成的set，其中包含诸如a、an、or、the、and和but之类的单字。将某单字放入map之前，先确定该单字并不存在于“排除字集”中。    
-一旦文本文件读取完毕，请显示一份单字清单，并显示各单字的出现次数。    
-可以再加以扩展，在显示单字之前，允许用户查询某个单字是否出现于文本文件中。
+(1) 写一个读取文本文件的程序，将文件中的每个单字存入map。（map的key是单字，map的value是该单字在文本文件中出现的次数。）    
+(2) 再定义一份由“排除字集”组成的set，其中包含诸如a、an、or、the、and和but之类的单字。将某单字放入map之前，先确定该单字并不存在于“排除字集”中。    
+(3) 一旦文本文件读取完毕，请显示一份单字清单，并显示各单字的出现次数。    
+(4) 对程序加以扩展，在显示单字之前，允许用户查询某个单字是否出现于文本文件中。
 
 * [练习3.2](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%203/3_2.cpp)
 
-读取文本文件内容（同练习3.1）并将内容存储于vector。    
-以字符串长度为依据，对vector排序。    
-定义一个function object并传给sort()；这个function object接受两个字符串，当第一个字符串的长度小于第二个字符串的长度时，就返回true。    
-最后，打印排序后的vector内容。
+(1) 读取文本文件内容（同练习3.1）并将内容存储于vector。    
+(2) 以字符串长度为依据，对vector排序。    
+(3) 定义一个function object并传给sort()；这个function object接受两个字符串，当第一个字符串的长度小于第二个字符串的长度时，就返回true。    
+(4) 打印排序后的vector内容。
