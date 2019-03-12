@@ -51,7 +51,8 @@ int main()
     while ( ifile >> word )
         text.push_back( word );
 
-    sort( text.begin(), text.end(), LessThan() );
+    sort( text.begin(), text.end() );
+    stable_sort( text.begin(), text.end(), LessThan() );
 
     cout << "The text is sorted. \n"
          << "How many words to display in one line? : (1-20) ";
