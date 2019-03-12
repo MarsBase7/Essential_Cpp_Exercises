@@ -95,7 +95,7 @@ Pentagonal数列的求值公式是P(n)=n(3n-1)/2，借此产生1,5,12,22,35等�
 (1) 读取文本文件内容（同练习3.1）并将内容存储于vector。    
 (2) 以字符串长度为依据，对vector排序。    
 (3) 定义一个function object并传给sort()；这个function object接受两个字符串，当第一个字符串的长度小于第二个字符串的长度时，就返回true。    
-(4) 打印排序后的vector内容。
+(4) 打印排序后的vector内容。（在字符串长度相等的情况下，以其字母顺序排序）
 
 * [练习3.3](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%203/3_3.cpp)
 
