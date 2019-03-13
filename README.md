@@ -99,7 +99,7 @@ Pentagonal数列的求值公式是P(n)=n(3n-1)/2，借此产生1,5,12,22,35等�
 
 * [练习3.3](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%203/3_3.cpp)
 
-(1) 定义一个map，以家庭姓氏为key，value是家庭所有小孩的名字。令此map至少容纳六笔数据。    
+(1) 定义一个map，以家庭姓氏为key，value是家庭所有小孩的名字。（此map至少容纳六笔数据，格式为：姓氏 名字 名字 ……）    
 (2) 允许用户根据姓氏来查询，并得以打印map内的每一笔数据。
 
 ---
