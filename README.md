@@ -117,3 +117,8 @@ Pentagonal数列的求值公式是P(n)=n(3n-1)/2，借此产生1,5,12,22,35等�
 
 * [练习4.1](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%204/4_1.cpp)
 
+(1) 建立Stack.h和Stack.suffix，此处的suffix是编译器所能接受的扩展名，或是项目所使用的扩展名。    
+(2) 编写main()函数，练习操作Stack的所有公开接口，并加以编译执行。程序代码文件和main()都必须包含Stack.h:     
+`# include "Stack.h"`
+
+* [练习4.2](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%204/4_2.cpp)
