@@ -5,7 +5,7 @@
 # include "Stack.h"
 */
 
-# include "Stack.cpp"
+# include "Stack1.cpp"
 
 int main()
 {
