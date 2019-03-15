@@ -127,3 +127,15 @@ Pentagonal数列的求值公式是P(n)=n(3n-1)/2，借此产生1,5,12,22,35等�
 (1) find()会查看某值是否存在而返回true或false。    
 (2) count()返回某字符串的出现次数。    
 重新实现练习4.1的main()，让它调用这两个函数。
+
+* [练习4.3](https://github.com/MarsBase7/Essential_Cpp_Exercises/blob/master/Chapter%204/4_3.cpp)
+
+考虑以下所定义的全局(global)数据：
+```
+string program_name;
+string version_stamp;
+int version_number;
+int tests_run;
+int tests_passed;
+```
+编写一个用以包装这些数据的类。
